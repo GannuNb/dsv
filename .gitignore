@@ -8,6 +8,7 @@ dsvtask-backend/dist
 
 # Env files
 dsvtask-backend/.env
+dsvtask-frontend/.env
 
 # Logs
 npm-debug.log*
