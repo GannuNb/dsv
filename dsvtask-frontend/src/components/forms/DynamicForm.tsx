@@ -23,8 +23,6 @@ const DynamicForm = ({
   const [formData, setFormData] = useState<any>(initialValues);
   const [errors, setErrors] = useState<any>({});
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[6-9]\d{9}$/;
 
   const invalidGmailDomains = [
     "gmil.com",
@@ -33,39 +31,59 @@ const DynamicForm = ({
     "gmail.con",
     "gmail.cm",
   ];
+const nameRegex = /^[A-Za-z\s]+$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^[6-9]\d{9}$/;
 
-  const validate = () => {
-    const newErrors: any = {};
+const validate = () => {
+  const newErrors: any = {};
 
-    fields.forEach((field) => {
-      const value = formData[field.name];
+  fields.forEach((field) => {
+    const value = formData[field.name];
 
-      if (field.required && !value) {
-        newErrors[field.name] = `${field.label} is required`;
-        return;
-      }
+    // Required check
+    if (field.required && !value) {
+      newErrors[field.name] = `${field.label} is required`;
+      return;
+    }
 
-      if (field.name === "email" && value) {
-        if (!emailRegex.test(value)) {
-          newErrors[field.name] = "Invalid email format";
-          return;
-        }
-        const domain = value.split("@")[1];
-        if (invalidGmailDomains.includes(domain)) {
-          newErrors[field.name] =
-            "Did you mean gmail.com? Please check email";
-        }
-      }
+    // First Name & Last Name validation
+    if (
+      (field.name === "firstName" || field.name === "lastName") &&
+      value &&
+      !nameRegex.test(value)
+    ) {
+      newErrors[field.name] =
+        "Only letters are allowed (no numbers or symbols)";
+    }
 
-      if (field.name === "phone" && value && !phoneRegex.test(value)) {
-        newErrors[field.name] =
-          "Phone must be a valid 10-digit number";
-      }
-    });
+// Email validation
+if (field.name === "email" && value) {
+  if (!emailRegex.test(value)) {
+    newErrors[field.name] =
+      "Please enter a valid email address (e.g. name@gmail.com or name@domain.com)";
+    return;
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const domain = value.split("@")[1]?.toLowerCase();
+
+  if (domain && invalidGmailDomains.includes(domain)) {
+    newErrors[field.name] =
+      "It looks like a Gmail address. Did you mean gmail.com?";
+  }
+}
+
+    // Phone number validation
+    if (field.name === "phone" && value && !phoneRegex.test(value)) {
+      newErrors[field.name] =
+        "Phone number must be 10 digits and start with 6–9";
+    }
+  });
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
