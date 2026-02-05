@@ -1,20 +1,19 @@
 # DSV React CRUD Application
 
 This project is a React-based CRUD (Create, Read, Update, Delete) web application built as part of a technical assessment.  
-It demonstrates clean React architecture, API integration, extensible UI design, and full-stack development practices.
+It demonstrates clean React architecture, API integration, and an extensible, configuration-driven UI.
 
 ---
 
 ## 🔧 Tech Stack
 
-### Frontend
+**Frontend**
 - React (Create React App)
 - TypeScript
 - Bootstrap
-- Fetch API
 - React Router
 
-### Backend
+**Backend**
 - Node.js
 - Express.js
 - MongoDB (Mongoose)
@@ -25,17 +24,20 @@ It demonstrates clean React architecture, API integration, extensible UI design,
 ## ✨ Features
 
 - Create user
-- View all users
+- View users list (/users)
 - Inline edit user details
 - Delete user
-- Frontend & backend validation
-- Configuration-driven UI (highly extensible)
+- Form validation (frontend + backend)
+- Configuration-driven and extensible UI (new fields like Date of Birth or Address can be added with minimal changes)
+
 
 ---
 
-## 🧩 Extensibility (Key Requirement)
+## ▶️ Setup Instructions
 
-The application is designed to be **configuration-driven**.
-
-All form fields, table columns, and edit inputs are generated from a **single configuration file**:
+### Backend
+```bash
+cd dsvtask-backend
+npm install
+npm run dev
 
