@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:5000/api/users";
+const API_URL = process.env.REACT_APP_API_URL as string;
 
 export const createUser = async (data: any) => {
-  const res = await fetch(API_URL, {
+  const res = await fetch(`${API_URL}/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -16,13 +16,13 @@ export const createUser = async (data: any) => {
 };
 
 export const getUsers = async () => {
-  const res = await fetch(API_URL);
+  const res = await fetch(`${API_URL}/users`);
   if (!res.ok) throw new Error("Failed to fetch users");
   return res.json();
 };
 
 export const updateUser = async (id: string, data: any) => {
-  const res = await fetch(`${API_URL}/${id}`, {
+  const res = await fetch(`${API_URL}/users/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -37,7 +37,7 @@ export const updateUser = async (id: string, data: any) => {
 };
 
 export const deleteUser = async (id: string) => {
-  const res = await fetch(`${API_URL}/${id}`, {
+  const res = await fetch(`${API_URL}/users/${id}`, {
     method: "DELETE",
   });
 
