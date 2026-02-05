@@ -28,10 +28,11 @@ export const userFormConfig = [
 //   label: "Date of Birth",
 //   type: "date"
 // },
-//   {
-//     name: "Adress",
-//     label: "adress",
-//     type: "text",
-//     required: true,
-//   },
+// {
+//   name: "address",
+//   label: "Address",
+//   type: "text",
+//   required: true,
+// },
+
 ];

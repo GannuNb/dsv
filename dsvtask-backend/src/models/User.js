@@ -14,33 +14,39 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "First name is required"],
+      required: true,
       trim: true,
     },
     lastName: {
       type: String,
-      required: [true, "Last name is required"],
+      required: true,
       trim: true,
     },
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: true,
       unique: true,
       lowercase: true,
       validate: {
         validator: function (value) {
           if (!emailRegex.test(value)) return false;
-
           const domain = value.split("@")[1];
           return !invalidGmailDomains.includes(domain);
         },
-        message: "Please enter a valid email address",
       },
     },
     phone: {
       type: String,
-      required: [true, "Phone number is required"],
-      match: [/^[6-9]\d{9}$/, "Please enter a valid phone number"],
+      required: true,
+    },
+
+    // ✅ MUST BE PRESENT
+    dob: {
+      type: Date,
+    },
+    address: {
+      type: String,
+      trim: true,
     },
   },
   { timestamps: true }
