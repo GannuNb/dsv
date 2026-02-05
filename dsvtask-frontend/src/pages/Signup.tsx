@@ -2,20 +2,29 @@ import { useState } from "react";
 import DynamicForm from "../components/forms/DynamicForm";
 import { userFormConfig } from "../config/userFormConfig";
 import { createUser } from "../api/userApi";
+import { useNavigate } from "react-router-dom";
+
 
 const Signup = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (data: any) => {
-    try {
-      setError("");
-      await createUser(data);
-      setSuccess("User created successfully");
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
+  const navigate = useNavigate();
+
+const handleSubmit = async (data: any) => {
+  try {
+    setError("");
+    await createUser(data);
+    setSuccess("User created successfully");
+
+    setTimeout(() => {
+      navigate("/users");
+    }, 800);
+  } catch (err: any) {
+    setError(err.message);
+  }
+};
+
 
   return (
     <div className="container mt-5">
