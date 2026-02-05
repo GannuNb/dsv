@@ -1,0 +1,23 @@
+# Node modules
+dsvtask-frontend/node_modules
+dsvtask-backend/node_modules
+
+# Build outputs
+dsvtask-frontend/build
+dsvtask-backend/dist
+
+# Env files
+dsvtask-backend/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor configs
+.vscode
+.idea
